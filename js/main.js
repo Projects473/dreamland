@@ -69,29 +69,18 @@ try {
 const save = () => { try { localStorage.setItem("dreamland-cart", JSON.stringify(cart)); } catch (e) {} };
 
 /* ---------- hero video ----------
-   The intro plays once (door opens, clouds glide in, balloons float out),
-   then the seamless loop takes over. Its first frame matches the intro's last. */
-const intro = $("#heroIntro"), loopV = $("#heroLoop"), media = $(".hero-media");
-const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-function startLoop() {
-  const p = loopV.play();
-  const reveal = () => { intro.classList.add("done"); media.classList.add("can-replay"); };
-  if (p && p.then) p.then(reveal).catch(reveal); else reveal();
-}
-function playIntro() {
-  loopV.pause(); loopV.currentTime = 0;
-  intro.classList.remove("done"); media.classList.remove("can-replay");
-  intro.currentTime = 0;
-  const p = intro.play();
-  if (p && p.catch) p.catch(startLoop);   // autoplay blocked: go straight to the loop
-}
-if (intro && loopV) {
-  if (reduceMotion) { intro.removeAttribute("autoplay"); intro.pause(); }
+   One 34-second video on a continuous loop: the door opens, clouds glide in and
+   balloons float up; the scene plays; then everything drifts home, the door
+   closes and it starts again. */
+const heroVideo = $("#heroVideo");
+if (heroVideo) {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { heroVideo.removeAttribute("autoplay"); heroVideo.pause(); }
   else {
-    intro.addEventListener("ended", startLoop);
-    intro.querySelector("source:last-of-type").addEventListener("error", startLoop);  // no playable format
-    playIntro();
-    $("#replay").addEventListener("click", playIntro);
+    const kick = () => { const p = heroVideo.play(); if (p && p.catch) p.catch(() => {}); };
+    kick();
+    // some browsers pause background video when the tab is hidden; resume on return
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) kick(); });
+    heroVideo.addEventListener("ended", () => { heroVideo.currentTime = 0; kick(); });
   }
 }
 

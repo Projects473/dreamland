@@ -19,7 +19,7 @@ A custom domain can be added under **Settings → Pages → Custom domain**.
 index.html          the page (all text lives here)
 css/styles.css      styling — colours are the tokens at the top
 js/main.js          settings, rentals, packages and the booking form
-assets/video/       hero intro and loop videos, with still posters
+assets/video/       hero video (WebM + MP4) and its still poster
 assets/images/      backup pictures shown if an online photo can't load
 assets/fonts/       Great Vibes, Josefin Sans and Poppins
 assets/logo.jpg     the Dreamland logo (header, footer and tab icon)
@@ -38,14 +38,15 @@ In `index.html`: the About text, service lists and testimonials. Prices are in E
 
 ## Hero video
 
-The top of the page plays in two parts, full HD (1920 × 1080):
+The top of the page plays one full-HD (1920 × 1080) video on a continuous loop, 34 seconds per cycle:
 
-1. **Intro (7 seconds, plays once):** the pink house from the logo sits on the clouds, its door swings open and warm light spills out, clouds with smiling faces glide in from both sides, and balloons float up out of the doorway as a rainbow and sparkles appear.
-2. **Loop (20 seconds, repeats):** the clouds drift and blink, balloons keep rising, sparkles twinkle and the light from the door glows. The loop starts on exactly the intro's last frame, so the hand-over is invisible.
+1. The pink house from the logo sits on the clouds; its door swings open and warm light spills out, smiling clouds glide in from both sides and balloons float up out of the doorway as the rainbow and sparkles appear.
+2. The scene plays: clouds drift and blink, balloons keep rising, sparkles twinkle.
+3. Everything drifts home: the balloons float back into the house, the clouds glide away and the door closes. Then it starts again.
 
-A replay button in the corner plays the door opening again. Visitors who turn off motion in their settings see a still picture instead.
+It's muted, so it autoplays on phones too. Visitors who turn off motion in their settings see the still `hero-poster.jpg` instead.
 
-Files in `assets/video/`: `intro.webm` + `intro.mp4`, `loop.webm` + `loop.mp4` (WebM for most browsers, MP4 for older iPhones), and `intro-poster.jpg` / `loop-poster.jpg`, the still frames shown while the videos load.
+Files in `assets/video/`: `hero.webm` (most browsers), `hero.mp4` (older iPhones) and `hero-poster.jpg`.
 
 ## Photos
 
